@@ -1,0 +1,144 @@
+:root {
+    --cell-size: calc(10vw + 10vh);
+    --mark-height: var(--cell-size);
+    --mark-width: calc(var(--cell-size) * 0.08);
+}
+body {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    height: 100vh;
+}
+
+.board {
+    width: fit-content;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+}
+
+.cell {
+    width: var(--cell-size);
+    height: var(--cell-size);
+    border: 2px solid rgb(0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.scoreboard {
+    position: absolute;
+    z-index: -1;
+    display: flex;
+    justify-content: space-between;
+    width: 80vw;
+    font-size: calc(2vh + 2vw);
+}
+
+.points {
+    text-align: center;
+    margin-top: 1vh;
+}
+
+.cell.x,
+.cell.o {
+    cursor: not-allowed;
+}
+
+.result {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.795);
+    color: rgb(0, 217, 255);
+    display: none;
+    place-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.winner-text {
+    font-size: 20vh;
+}
+
+.restart,
+.reset-score {
+    font-size: 4vh;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+
+.cell:nth-child(1),
+.cell:nth-child(2),
+.cell:nth-child(3) {
+    border-top: none;
+}
+
+.cell:nth-child(3n + 1) {
+    border-left: none;
+}
+
+.cell:nth-child(3n) {
+    border-right: none;
+}
+
+.cell:nth-child(n + 7) {
+    border-bottom: none;
+}
+
+/* Styling X */
+.cell.x::after,
+.cell.x::before,
+.board.x .cell:not(.x):not(.o):hover::before, 
+.board.x .cell:not(.x):not(.o):hover::after {
+    position: absolute;
+    content: "";
+    width: var(--mark-width);
+    height: var(--mark-height);
+    background-color: black;
+    border-radius: 50%;
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover::after {
+    rotate: 35deg;
+}
+
+.cell.x::before,
+.board.x .cell:not(.x):not(.o):hover::before {
+    rotate: -35deg;
+}
+
+/* Styling O */
+.cell.o::after,
+.board.o .cell:not(.x):not(.o):hover::after {
+    content: "";
+    width: calc(var(--mark-height) * 0.88);
+    height: calc(var(--mark-height) * 0.85);
+    background-color: black;
+    border-radius: 50%;
+}
+
+.cell.o::before,
+.board.o .cell:not(.x):not(.o):hover::before {
+    position: absolute;
+    content: "";
+    width: calc(var(--cell-size) * 0.77);
+    height: calc(var(--cell-size) * 0.77);
+    background-color: white;
+    border-radius: 50%;
+}
+
+.board.x .cell:not(.x):not(.o):hover::before, 
+.board.x .cell:not(.x):not(.o):hover::after,
+.board.o .cell:not(.x):not(.o):hover::after{
+    background-color: rgba(0, 0, 0, 0.349);
+}
+
+.restart-reset{
+    height: fit-content;
+    display: flex;
+    gap: 1vw
+}
